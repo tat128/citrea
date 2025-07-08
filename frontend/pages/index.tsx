@@ -30,6 +30,11 @@ const activity = [
   { icon: <Rocket size={18} />, desc: 'Earned "Early Adopter" badge', time: '1d ago' },
 ];
 
+type Beneficiary = {
+  beneficiary: string;
+  timelock: string;
+};
+
 export default function Home() {
   const [lang, setLang] = React.useState('EN');
   const toast = useToast();
@@ -58,7 +63,7 @@ export default function Home() {
   const assetBalances = { ETH: '2.50', USDC: '1200', BTC: '0.15' };
   const [beneficiary, setBeneficiary] = React.useState('');
   const [timelock, setTimelock] = React.useState('');
-  const [beneficiaries, setBeneficiaries] = React.useState([]);
+  const [beneficiaries, setBeneficiaries] = React.useState<Beneficiary[]>([]);
   const [createCircleOpen, setCreateCircleOpen] = React.useState(false);
   const [circles, setCircles] = React.useState([
     {
