@@ -345,7 +345,7 @@ export default function Home() {
                 <option value="BTC">BTC</option>
               </select>
               <div className="flex items-center gap-2 text-gray-400 text-sm">
-                Balance: <span className="text-white font-bold">{assetBalances[assetType]}</span> {assetType}
+                Balance: <span className="text-white font-bold">{assetBalances[assetType as keyof typeof assetBalances]}</span> {assetType}
               </div>
               <input
                 type="number"
@@ -611,8 +611,8 @@ export default function Home() {
                     <span className="font-bold text-blue-300">{msg.user}</span>
                     <span className="text-gray-200 flex-1">{msg.msg}</span>
                     {msg.proof && <span className="text-xs text-green-400 font-bold flex items-center gap-1"><ShieldCheck size={12} /> Proof</span>}
-          </div>
-        ))}
+                  </div>
+                ))}
               </div>
             )}
             {/* Vote Tab */}
