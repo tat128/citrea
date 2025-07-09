@@ -8,15 +8,25 @@ const demoUsers = [
   { name: 'Charlie', savings: 0.60, streak: 10, gifts: 0.10, badges: [], isCurrent: false },
 ];
 
-const categories = [
+const categories: { key: CategoryKey; label: string; icon: JSX.Element }[] = [
   { key: 'savings', label: 'Savings', icon: <Award size={18} className="text-yellow-400" /> },
   { key: 'streak', label: 'Streak', icon: <Flame size={18} className="text-orange-400" /> },
   { key: 'gifts', label: 'Gifting', icon: <Gift size={18} className="text-pink-400" /> },
 ];
 
+type CategoryKey = 'savings' | 'streak' | 'gifts';
+
+type DemoUser = typeof demoUsers[number];
+
 export default function Leaderboard() {
-  const [category, setCategory] = useState('savings');
-  const sorted = [...demoUsers].sort((a, b) => b[category] - a[category]);
+  const [category, setCategory] = useState<CategoryKey>('savings');
+  const getValue = (user: DemoUser, key: CategoryKey) => {
+    if (key === 'savings') return user.savings;
+    if (key === 'streak') return user.streak;
+    if (key === 'gifts') return user.gifts;
+    return 0;
+  };
+  const sorted = [...demoUsers].sort((a, b) => getValue(b, category) - getValue(a, category));
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 flex flex-col items-center py-16 px-4">
       <h1 className="text-3xl md:text-4xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 drop-shadow-lg mb-8 text-center tracking-tight">Global Leaderboard</h1>

@@ -74,7 +74,8 @@ export default function App({ Component, pageProps }: AppProps) {
   const [showHistory, setShowHistory] = useState(false);
   const [showInsights, setShowInsights] = useState(false);
   const [notifOpen, setNotifOpen] = React.useState(false);
-  const [notifications, setNotifications] = React.useState([
+  type Notification = { id: number; text: string; read: boolean };
+  const [notifications, setNotifications] = React.useState<Notification[]>([
     { id: 1, text: 'Deposit confirmed: 0.1 BTC', read: false },
     { id: 2, text: 'You earned the Goal Crusher badge!', read: false },
     { id: 3, text: 'Alice sent you a gift!', read: true },
